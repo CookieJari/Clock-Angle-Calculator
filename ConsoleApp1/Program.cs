@@ -3,25 +3,53 @@
 
 Console.WriteLine("Hello, World!");
 
+bool play = true;
+while (play) {
+    // Get The input
+    int hours = GetInput("Hours: ", true);
+    int mins = GetInput("Minutes: ", false);
 
-// Get The input
-int hours = GetInput("Hours: ", true);
-int mins = GetInput("Minutes: ", false);
+    // Get the angles of the hands
+    float minDegree = GetMinuteDegree(mins);
+    float hourDegree = GetHourDegree(hours, mins);
 
-// Get the angles of the hands
-float minDegree = GetMinuteDegree(mins);
-float hourDegree = GetHourDegree(hours, mins);
+    // Calculate the angles between each hand
+    float angle = Math.Abs(minDegree - hourDegree);
+    if (angle > 180)
+        angle = 360 - angle;
 
-// Calculate the angles between each hand
-float angle = Math.Abs(minDegree - hourDegree);
-if (angle > 180)
-    angle = 360 - angle;
-
-// Write the ouput
-Console.WriteLine("The lesser angle between them is: "+ angle);
+    // Write the ouput
+    Console.WriteLine("The lesser angle between them is: " + angle);
 
 
+    play = PlayAgain();
 
+    
+}
+
+
+
+
+bool PlayAgain()
+{
+    Console.WriteLine("Play Again? Y|N: \t");
+    while (true) {
+        string inp = Console.ReadLine();
+        if (inp.ToLower() == "y")
+        {
+            return true;
+        }
+        else if (inp.ToLower() == "n")
+        {
+            return false;
+        }
+        else
+        {
+            Console.WriteLine("Invalid input. Please enter 'y' or 'n'.\t");
+        }
+    }  
+
+}
 
 float GetMinuteDegree(int minutes)
 {
@@ -74,5 +102,5 @@ int GetInput(string msg, bool isHours) {
     }
 
     return number;
-};
+}
     
